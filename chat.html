@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MindfulAI Chatbot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+    }
+
+     header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: white;
+      border-bottom: 1px solid #ddd;
+    }
+
+
+    .logo {
+      font-weight: 600;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    nav a.active {
+      color: #297BE6;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    p.description {
+      color: #555;
+      margin-bottom: 32px;
+    }
+
+    .chat-box {
+      background-color: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-message {
+      background-color: #f1f1f1;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      max-width: 80%;
+    }
+
+    .chat-message.user {
+      background-color: #DCF8C6;
+      align-self: flex-end;
+    }
+
+    .input-container {
+      display: flex;
+      margin-top: 16px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid #ccc;
+      border-radius: 24px 0 0 24px;
+      outline: none;
+    }
+
+    button.send-btn {
+      background-color: #297BE6;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 0 24px 24px 0;
+      cursor: pointer;
+    }
+
+    .note {
+      margin-top: 24px;
+      background-color: #f1f1f1;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="1st.html" class="logo" style="text-decoration: none; color: inherit;">
+    <span>ℹ️</span>
+    MindfulAI
+  </a>
+  <nav>
+    <a href="chat.html">Chat</a>
+    <a href="music_section.html">Music Therapy</a>
+    <a href="exercise_section.html">Exercises</a>
+    <a href="#">Resources</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>AI Mental Health Assistant</h1>
+  <p class="description">Share how you're feeling with our AI assistant trained to provide supportive responses for your mental well-being.</p>
+
+  <div class="chat-box" id="chatBox">
+    <div class="chat-message">Hello! I'm your AI mental health assistant. How are you feeling today? I'm here to listen and support you.</div>
+  </div>
+
+  <div class="input-container">
+    <input type="text" id="userInput" placeholder="Type your message..." onkeydown="if(event.key === 'Enter') sendMessage()"/>
+    <button class="send-btn" onclick="sendMessage()">➤</button>
+  </div>
+
+  <div class="note">
+    <em>Note: This AI assistant is designed to provide supportive guidance but is not a substitute for professional mental health care. If you're in crisis, please contact emergency services or a mental health professional.</em>
+  </div>
+</div>
+
+<script>
+const GROQ_API_KEY = "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"; // Replace with your actual key
+const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+
+async function sendMessage() {
+  const input = document.getElementById("userInput");
+  const message = input.value.trim();
+  if (!message) return;
+
+  const chatBox = document.getElementById("chatBox");
+
+  const userMessage = document.createElement("div");
+  userMessage.className = "chat-message user";
+  userMessage.textContent = message;
+  chatBox.appendChild(userMessage);
+
+  input.value = "";
+
+  try {
+    const response = await fetch(GROQ_URL, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${GROQ_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "llama3-8b-8192",
+        messages: [
+          { role: "system", content: "You are a supportive AI mental health assistant." },
+          { role: "user", content: message }
+        ],
+        temperature: 0.7
+      })
+    });
+
+    const data = await response.json();
+    console.log("Groq response:", data);
+
+    const replyText = data.choices?.[0]?.message?.content || "I'm having trouble responding. Please try again.";
+
+    const assistantMessage = document.createElement("div");
+    assistantMessage.className = "chat-message";
+    assistantMessage.textContent = replyText;
+    chatBox.appendChild(assistantMessage);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  } catch (err) {
+    console.error("Groq API error:", err);
+    const errorMsg = document.createElement("div");
+    errorMsg.className = "chat-message";
+    errorMsg.textContent = "Something went wrong. Please try again later.";
+    chatBox.appendChild(errorMsg);
+  }
+}
+</script>
+
+</body>
+</html>

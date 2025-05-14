@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindfulAI - Music Therapy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: white;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    p.description {
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .grid-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .category {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      width: 320px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    .category h3, .category p {
+      color: black;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 5px;
+    }
+
+    a.more-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+ <header>
+  <a href="1st.html" class="logo" style="text-decoration: none; color: inherit;">
+    <span>ℹ️</span>
+    MindfulAI
+  </a>
+  <nav>
+    <a href="chat.html">Chat</a>
+    <a href="music_section.html">Music Therapy</a>
+    <a href="exercise_section.html">Exercises</a>
+    <a href="#">Resources</a>
+  </nav>
+</header>
+
+
+  <main>
+    <h2>Music Therapy</h2>
+    <p class="description">Explore curated playlists designed to help manage stress, anxiety, improve focus, or help with sleep.</p>
+
+    <div class="grid-container">
+      <div class="category">
+        <h3>Anxiety Relief</h3>
+        <p>Calming melodies to help reduce anxiety and promote relaxation.</p>
+        <p>Gentle Ocean Waves</p>
+        <audio controls src=""></audio>
+        <p>Forest Morning</p>
+        <audio controls src=""></audio>
+        <a class="more-link" href="#">View all anxiety relief tracks &rarr;</a>
+      </div>
+
+      <div class="category">
+        <h3>Sleep Aid</h3>
+        <p>Soothing sounds to help you fall asleep and improve sleep quality.</p>
+        <p>Deep Sleep Meditation</p>
+        <audio controls src=""></audio>
+        <p>Rainy Night</p>
+        <audio controls src=""></audio>
+        <a class="more-link" href="#">View all sleep aid tracks &rarr;</a>
+      </div>
+
+      <div class="category">
+        <h3>Focus & Concentration</h3>
+        <p>Instrumental music to enhance focus and productivity.</p>
+        <p>Deep Focus</p>
+        <audio controls src=""></audio>
+        <p>Ambient Study</p>
+        <audio controls src=""></audio>
+        <a class="more-link" href="#">View all focus & concentration tracks &rarr;</a>
+      </div>
+
+      <div class="category">
+        <h3>Mood Elevation</h3>
+        <p>Uplifting music designed to boost your mood and energy.</p>
+        <p>Morning Motivation</p>
+        <audio controls src=""></audio>
+        <p>Positive Energy</p>
+        <audio controls src=""></audio>
+        <a class="more-link" href="#">View all mood elevation tracks &rarr;</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
